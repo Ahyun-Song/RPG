@@ -12,12 +12,12 @@ namespace RPG
 
         public void Attack_skill(string skill)
         {
-            Console.WriteLine($"{Name} uses attack skill: {skill}");
+            Console.WriteLine($"{Name} uses attack skill");
         }
 
         public void Defense_skill(string skill)
         {
-            Console.WriteLine($"{Name} uses defense skill: {skill}");
+            Console.WriteLine($"{Name} uses defense skill");
         }
     }
 }

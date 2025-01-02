@@ -37,7 +37,7 @@ namespace RPG
             // 초기 상태 출력
             Console.WriteLine("Battle Initialized!");
             Console.WriteLine($"{player.Name} vs {currentMonster.Name}");
-            Console.WriteLine($"{player.Name} HP: {player.HP}, {currentMonster.Name} HP: {currentMonster.HP}");
+            Console.WriteLine($"{player.Name} HP: {player.HP}, {currentMonster.Name} HP: {currentMonster.HP}\r\n");
 
             // KeyDown 이벤트 활성화
             this.KeyPreview = true; // 폼 전체에서 키 입력 감지
@@ -53,8 +53,7 @@ namespace RPG
                 {
                     // 플레이어 턴
                     player.Attack(currentMonster);
-                    Console.WriteLine($"{player.Name} attacks {currentMonster.Name}!");
-                    Console.WriteLine($"{currentMonster.Name}'s HP: {currentMonster.HP}");
+                    Console.WriteLine($"{player.Name}'s HP: {player.HP}, {currentMonster.Name}'s HP: {currentMonster.HP}\r\n");
 
                     if (currentMonster.HP <= 0)
                     {
@@ -64,11 +63,11 @@ namespace RPG
                         if (monsters.Count > 0)
                         {
                             currentMonster = monsters.Dequeue();
-                            Console.WriteLine($"Next battle: {player.Name} vs {currentMonster.Name}");
+                            Console.WriteLine($"Next battle: {player.Name} vs {currentMonster.Name}\r\n");
                         }
                         else
                         {
-                            Console.WriteLine("All monsters are defeated!");
+                            Console.WriteLine("All monsters are defeated!\r\n");
                             return;
                         }
                     }
@@ -77,12 +76,21 @@ namespace RPG
                 {
                     // 몬스터 턴
                     currentMonster.Attack(player);
-                    Console.WriteLine($"{currentMonster.Name} attacks {player.Name}!");
-                    Console.WriteLine($"{player.Name}'s HP: {player.HP}");
+
+                    if (currentMonster is Orc orc)
+                    {
+                        orc.Smash(); // Orc의 Smash 호출
+                    }
+                    else if(currentMonster is Slime slime)
+                    {
+                        slime.BounceAttack();
+                    }
+                    
+                    Console.WriteLine($"{player.Name}'s HP: {player.HP}, {currentMonster.Name}'s HP: {currentMonster.HP}\r\n");
 
                     if (player.HP <= 0)
                     {
-                        Console.WriteLine($"{player.Name} is defeated!");
+                        Console.WriteLine($"{player.Name} is defeated!\r\n");
                         return;
                     }
                 }
@@ -92,7 +100,7 @@ namespace RPG
             }
             else
             {
-                Console.WriteLine("Battle already finished!");
+                Console.WriteLine("Battle finished!\r\n");
             }
         }
     }
